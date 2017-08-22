@@ -2,7 +2,7 @@
 
 ## Paper : Reserve Group Based Group Fragmentation Method for Reliable Connected Car Application(KICS 2017)
 
-### Installation in Raspberry Pi 3 Model B
+## Installation in Raspberry Pi 3 Model B
 
 1. Setup Ad-hoc mode
 
@@ -65,6 +65,43 @@
 	
 		#date
 		
-Execute Code
+## System Architecture
 
-	1. 
+![SystemArchitecture](./images/SystemConfigurationDiagram.png)
+
+Each two cars connect each other. Using Server-Client socket.
+
+Data flow:
+
+	1. Group leader sends a path request message to all group members.
+	2. If all group members receive a path request message from group leader, they send a path reply message to group leader.
+	3. If group leader receive all path reply message from group member, group leader execute the subgroup generation algorithm.
+	4. After the algorithm, group leader sends the group align information to all group members.
+	5. If all group members receive the group align information, they send acknowlege message to group leader.
+
+## Execute Process
+
+Compile Code:
+
+	#gcc -o ConnectedCar ConnectedCar.c
+
+Execute Program:
+
+	Group Leader
+	   #./ConnectedCar -L [FrontIp] [myCarId] [PortNumber]
+   
+	Group member
+	   #./ConnectedCar [FrontIp] [myCarId] [PortNumber]
+
+## License
+
+MIT
+
+## Author
+
+Kyungpook National University:
+
+	Eunho Son
+	Munju Jeong
+	Hyunha Jeon
+	Myeongjun Kim
